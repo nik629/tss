@@ -1,0 +1,11 @@
+prefix=/home/nik/workspace/x86_mock_out
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: tss2-mu
+Description: TPM2 type marshaling and unmarshaling library.
+URL: https://github.com/tpm2-software/tpm2-tss
+Version: 4.1.2
+Cflags: -I${includedir} -I${includedir}/tss2
+Libs: -ltss2-mu -L${libdir}

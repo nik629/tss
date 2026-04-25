@@ -1,0 +1,3 @@
+/home/nik/workspace/test/CMakeFiles/test_tss.dir
+/home/nik/workspace/test/CMakeFiles/edit_cache.dir
+/home/nik/workspace/test/CMakeFiles/rebuild_cache.dir

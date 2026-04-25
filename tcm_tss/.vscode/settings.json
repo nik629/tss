@@ -1,0 +1,5 @@
+{
+    "files.associations": {
+        "tss2_tcti_device.h": "c"
+    }
+}

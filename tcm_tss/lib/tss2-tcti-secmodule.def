@@ -1,0 +1,4 @@
+LIBRARY tss2-tcti-secmodule
+EXPORTS
+    Tss2_Tcti_Info
+    Tss2_Tcti_Secmodule_Init

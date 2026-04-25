@@ -1,0 +1,70 @@
+.\" Process this file with
+.\" groff -man -Tascii foo.1
+.\"
+.TH Tss2_TctiLdr_FreeInfo 3 "JUNE 2019" "TPM2 Software Stack"
+.SH NAME
+Tss2_TctiLdr_FreeInfo \- Function to free a TSS2_TCTI_INFO structure
+allocated by
+.BR Tss2_TctiLdr_Initialize ().
+.SH SYNOPSIS
+.B #include <tss2/tss2_tctildr.h>
+.sp
+.sp
+.BI "void Tss2_TctiLdr_FreeInfo (TSS2_TCTI_INFO" "*info" ");"
+.sp
+.SH DESCRIPTION
+The
+.BR Tss2_TctiLdr_FreeInfo ()
+function destroys an instance of the TSS2_TCTI_INFO structure created by
+the
+.BR Tss2_TctiLdr_GetInfo ()
+function.
+.sp
+The
+.I info
+parameter is a reference to the TSS2_TCTI_INFO structure to be freed.
+.sp
+
+.SH RETURN VALUE
+This function returns no value.
+.SH EXAMPLE
+Example code.
+.sp
+.nf
+#include <inttypes.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <tss2/tss2_tctildr.h>
+
+TSS2_TCTI_INFO *info = NULL;
+TSS2_RC rc = Tss2_TctiLdr_GetInfo (NULL, &info);
+if (rc != TSS2_RC_SUCCESS) {
+    fprintf (stderr, "Failed to get TSS2_TCTI_INFO structure for default "
+             "TCTI with response code: 0x%" PRIx32 "\n", rc);
+    exit (EXIT_FAILURE);
+}
+
+if (info != NULL) {
+    Tss2_TctiLdr_FreeInfo (info);
+    info = NULL;
+}
+
+exit (EXIT_SUCCESS);
+.fi
+.SH AUTHOR
+TPM2 Software Project <https://github.com/tpm2-software/tpm2-tss>
+.SH "SEE ALSO"
+.BR Tss2_Tcti_Device_Init (3),
+.BR Tss2_Tcti_Socket_Init (3),
+.BR Tss2_TctiLdr_Initialize (3),
+.BR Tss2_TctiLdr_Finalize (3),
+.BR tcti-device (7),
+.BR tcti-socket (7),
+.BR tcti-tabrmd (7),
+.BR tpm2-abrmd (8)
+.SH COLOPHON
+This page is part of release 4.1.2 of Open Source implementation of the
+TCG TPM2 Software Stack (TSS2). A description of the project, information
+about reporting bugs, and the latest version of this page can be found at
+\%https://github.com/tpm2-software/tpm2-tss/.

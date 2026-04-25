@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/test_tss.dir/test_tss.c.o -o test_tss  -Wl,-rpath,/home/nik/workspace/x86_mock_out/lib /home/nik/workspace/x86_mock_out/lib/libtss2-esys.so /home/nik/workspace/x86_mock_out/lib/libtss2-tctildr.so 

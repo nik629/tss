@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "tcti-common.h": "c",
+        "tcti-secmodule.h": "c"
+    }
+}
