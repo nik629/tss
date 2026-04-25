@@ -312,14 +312,17 @@ tss2_HEADERS += $(srcdir)/include/tss2/tss2_tcti_secmodule.h
 lib_LTLIBRARIES += $(libtss2_tcti_secmodule)
 pkgconfig_DATA += lib/tss2-tcti-secmodule.pc
 
-# 【新增】告诉编译器去哪里找 adapter 的头文件，解决 #include 找不到文件的问题
-src_tss2_tcti_libtss2_tcti_secmodule_la_CFLAGS = $(AM_CFLAGS) -I$(srcdir)/src/dal-adapter
+# 作用: 告诉编译器在编译 dal_tcm_adapter.c 时，去哪里找 coprocessor.h 头文件
+src_tss2_tcti_libtss2_tcti_secmodule_la_CFLAGS = $(AM_CFLAGS) \
+    -I$(srcdir)/src/dal-adapter \
+    -I$(srcdir)/src/coprocessor/include
 
 if HAVE_LD_VERSION_SCRIPT
 src_tss2_tcti_libtss2_tcti_secmodule_la_LDFLAGS  = -Wl,--version-script=$(srcdir)/lib/tss2-tcti-secmodule.map
 endif # HAVE_LD_VERSION_SCRIPT
 
-src_tss2_tcti_libtss2_tcti_secmodule_la_LIBADD   = $(libtss2_mu) $(libutil)
+src_tss2_tcti_libtss2_tcti_secmodule_la_LIBADD   = $(libtss2_mu) $(libutil) \
+    -L$(srcdir)/src/coprocessor -lcoprocessor
 
 # 【修改】修复了原来写错的 swtpm.h，并加入了跨目录的 adapter 源码
 src_tss2_tcti_libtss2_tcti_secmodule_la_SOURCES  = \

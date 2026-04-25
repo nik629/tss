@@ -17,7 +17,7 @@ old_library='libtss2-tcti-secmodule.a'
 inherited_linker_flags=''
 
 # Libraries that this one depends upon.
-dependency_libs=' /home/nik/workspace/tcm_tss/src/tss2-mu/libtss2-mu.la'
+dependency_libs=' /home/nik/workspace/tcm_tss/src/tss2-mu/libtss2-mu.la -L./src/coprocessor -lcoprocessor'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''
@@ -39,4 +39,4 @@ dlpreopen=''
 
 # Directory that this library needs to be installed in:
 libdir='/home/nik/workspace/x86_mock_out/lib'
-relink_command="(cd /home/nik/workspace/tcm_tss; /bin/bash \"/home/nik/workspace/tcm_tss/libtool\"  --silent --tag CC --mode=relink gcc -I./src -I./include/tss2 -I./test/fuzz/tcti -O2 -std=c99 -Wall -Wextra -Wformat-security -fstack-protector-all -fpic -fPIC -Wno-missing-braces -Wstrict-overflow=5 -I./src/dal-adapter -g -O0 -DSIMULATE_X86 -Wl,--version-script=./lib/tss2-tcti-secmodule.map -o src/tss2-tcti/libtss2-tcti-secmodule.la -rpath /home/nik/workspace/x86_mock_out/lib src/tss2-tcti/libtss2_tcti_secmodule_la-tcti-common.lo src/tss2-tcti/libtss2_tcti_secmodule_la-tcti-secmodule.lo src/dal-adapter/tss2_tcti_libtss2_tcti_secmodule_la-dal_tcm_adapter.lo src/tss2-mu/libtss2-mu.la libutil.la @inst_prefix_dir@)"
+relink_command="(cd /home/nik/workspace/tcm_tss; /bin/bash \"/home/nik/workspace/tcm_tss/libtool\"  --silent --tag CC --mode=relink gcc -I./src -I./include/tss2 -I./test/fuzz/tcti -O2 -std=c99 -Wall -Wextra -Wformat-security -fstack-protector-all -fpic -fPIC -Wno-missing-braces -Wstrict-overflow=5 -I./src/dal-adapter -I./src/coprocessor/include -g -O0 -DSIMULATE_X86 -Wl,--version-script=./lib/tss2-tcti-secmodule.map -o src/tss2-tcti/libtss2-tcti-secmodule.la -rpath /home/nik/workspace/x86_mock_out/lib src/tss2-tcti/libtss2_tcti_secmodule_la-tcti-common.lo src/tss2-tcti/libtss2_tcti_secmodule_la-tcti-secmodule.lo src/dal-adapter/tss2_tcti_libtss2_tcti_secmodule_la-dal_tcm_adapter.lo src/tss2-mu/libtss2-mu.la libutil.la -L./src/coprocessor -lcoprocessor @inst_prefix_dir@)"

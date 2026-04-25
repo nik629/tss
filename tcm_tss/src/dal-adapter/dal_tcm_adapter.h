@@ -2,7 +2,7 @@
 #define DAL_TCM_ADAPTER_H
 
 #include <stdint.h>
-
+#include "mock_coprocessor.h" // 引入模拟库的头文件
 /* * 数据结构定义 
  * 注意：如果你的 "pme_app/dalib/dal_m3_msg_intf.h" 中已经定义了该结构体，
  * 请将此处的定义注释掉，以避免重复定义报错。

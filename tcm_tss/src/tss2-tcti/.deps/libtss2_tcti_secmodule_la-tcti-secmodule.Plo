@@ -91,7 +91,8 @@ src/tss2-tcti/libtss2_tcti_secmodule_la-tcti-secmodule.lo: \
  include/tss2/tss2_mu.h src/tss2-tcti/tcti-common.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
  src/tss2-tcti/tcti-secmodule.h src/dal-adapter/dal_tcm_adapter.h \
- src/util-io/io.h /usr/include/arpa/inet.h /usr/include/netinet/in.h \
+ src/coprocessor/include/mock_coprocessor.h src/util-io/io.h \
+ /usr/include/arpa/inet.h /usr/include/netinet/in.h \
  /usr/include/x86_64-linux-gnu/sys/socket.h \
  /usr/include/x86_64-linux-gnu/bits/socket.h \
  /usr/include/x86_64-linux-gnu/bits/socket_type.h \
@@ -220,6 +221,7 @@ src/tss2-tcti/tcti-common.h:
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
 src/tss2-tcti/tcti-secmodule.h:
 src/dal-adapter/dal_tcm_adapter.h:
+src/coprocessor/include/mock_coprocessor.h:
 src/util-io/io.h:
 /usr/include/arpa/inet.h:
 /usr/include/netinet/in.h:

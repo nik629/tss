@@ -817,6 +817,8 @@ ENABLE_TCTI_MSSIM_FALSE
 ENABLE_TCTI_MSSIM_TRUE
 ENABLE_TCTI_DEVICE_FALSE
 ENABLE_TCTI_DEVICE_TRUE
+ENABLE_TCTI_SECMODULE_FALSE
+ENABLE_TCTI_SECMODULE_TRUE
 ENABLE_UTIL_IO_FALSE
 ENABLE_UTIL_IO_TRUE
 UUID_LIBS
@@ -1022,6 +1024,7 @@ enable_vendor
 enable_util_io
 with_tctidefaultmodule
 with_tctidefaultconfig
+enable_tcti_secmodule
 enable_tcti_device
 enable_tcti_mssim
 enable_tcti_swtpm
@@ -1749,6 +1752,8 @@ Optional Features:
   --disable-policy        build the tss2-policy library (default is yes)
   --enable-vendor         build vendor specific extensions (default is yes)
   --disable-util-io       don't build the util-io
+  --disable-tcti-secmodule
+                          don't build the tcti-secmodule module
   --disable-tcti-device   don't build the tcti-device module
   --disable-tcti-mssim    don't build the tcti-mssim module
   --disable-tcti-swtpm    don't build the tcti-swtpm module
@@ -4033,7 +4038,7 @@ AM_BACKSLASH='\'
 ac_config_headers="$ac_config_headers config.h"
 
 
-ac_config_files="$ac_config_files Makefile Doxyfile lib/tss2-sys.pc lib/tss2-esys.pc lib/tss2-mu.pc lib/tss2-tcti-secmodule.pc lib/tss2-tcti-mssim.pc lib/tss2-tcti-swtpm.pc lib/tss2-tcti-pcap.pc lib/tss2-tcti-libtpms.pc lib/tss2-rc.pc lib/tss2-tctildr.pc lib/tss2-fapi.pc lib/tss2-tcti-cmd.pc lib/tss2-policy.pc lib/tss2-tcti-spi-helper.pc lib/tss2-tcti-spi-ltt2go.pc lib/tss2-tcti-spidev.pc lib/tss2-tcti-spi-ftdi.pc lib/tss2-tcti-i2c-helper.pc lib/tss2-tcti-i2c-ftdi.pc"
+ac_config_files="$ac_config_files Makefile Doxyfile lib/tss2-sys.pc lib/tss2-esys.pc lib/tss2-mu.pc lib/tss2-tcti-device.pc lib/tss2-tcti-secmodule.pc lib/tss2-tcti-mssim.pc lib/tss2-tcti-swtpm.pc lib/tss2-tcti-pcap.pc lib/tss2-tcti-libtpms.pc lib/tss2-rc.pc lib/tss2-tctildr.pc lib/tss2-fapi.pc lib/tss2-tcti-cmd.pc lib/tss2-policy.pc lib/tss2-tcti-spi-helper.pc lib/tss2-tcti-spi-ltt2go.pc lib/tss2-tcti-spidev.pc lib/tss2-tcti-spi-ftdi.pc lib/tss2-tcti-i2c-helper.pc lib/tss2-tcti-i2c-ftdi.pc"
 
 
 # propagate configure arguments to distcheck
@@ -19243,6 +19248,29 @@ printf "%s\n" "#define ESYS_TCTI_DEFAULT_CONFIG \"$with_tctidefaultconfig\"" >>c
 fi
 
 
+# Check whether --enable-tcti-secmodule was given.
+if test ${enable_tcti_secmodule+y}
+then :
+  enableval=$enable_tcti_secmodule;
+else $as_nop
+  enable_tcti_secmodule=yes
+fi
+
+ if test "x$enable_tcti_secmodule" != xno; then
+  ENABLE_TCTI_SECMODULE_TRUE=
+  ENABLE_TCTI_SECMODULE_FALSE='#'
+else
+  ENABLE_TCTI_SECMODULE_TRUE='#'
+  ENABLE_TCTI_SECMODULE_FALSE=
+fi
+
+if test "x$enable_tcti_secmodule" = "xyes"
+then :
+
+printf "%s\n" "#define TCTI_SECMODULE 1" >>confdefs.h
+
+fi
+
 # Check whether --enable-tcti-device was given.
 if test ${enable_tcti_device+y}
 then :
@@ -26056,6 +26084,10 @@ if test -z "${ENABLE_UTIL_IO_TRUE}" && test -z "${ENABLE_UTIL_IO_FALSE}"; then
   as_fn_error $? "conditional \"ENABLE_UTIL_IO\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${ENABLE_TCTI_SECMODULE_TRUE}" && test -z "${ENABLE_TCTI_SECMODULE_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_TCTI_SECMODULE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${ENABLE_TCTI_DEVICE_TRUE}" && test -z "${ENABLE_TCTI_DEVICE_FALSE}"; then
   as_fn_error $? "conditional \"ENABLE_TCTI_DEVICE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -27148,6 +27180,7 @@ do
     "lib/tss2-esys.pc") CONFIG_FILES="$CONFIG_FILES lib/tss2-esys.pc" ;;
     "lib/tss2-mu.pc") CONFIG_FILES="$CONFIG_FILES lib/tss2-mu.pc" ;;
     "lib/tss2-tcti-device.pc") CONFIG_FILES="$CONFIG_FILES lib/tss2-tcti-device.pc" ;;
+    "lib/tss2-tcti-secmodule.pc") CONFIG_FILES="$CONFIG_FILES lib/tss2-tcti-secmodule.pc" ;;
     "lib/tss2-tcti-mssim.pc") CONFIG_FILES="$CONFIG_FILES lib/tss2-tcti-mssim.pc" ;;
     "lib/tss2-tcti-swtpm.pc") CONFIG_FILES="$CONFIG_FILES lib/tss2-tcti-swtpm.pc" ;;
     "lib/tss2-tcti-pcap.pc") CONFIG_FILES="$CONFIG_FILES lib/tss2-tcti-pcap.pc" ;;
