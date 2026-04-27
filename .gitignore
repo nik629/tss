@@ -1,3 +1,3 @@
 /x86_mock_out
-.deps/*
-.lib/*
+.deps/
+.lib/
