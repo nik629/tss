@@ -24,6 +24,9 @@ extern TPCM_TCM_cmd p_tpcm_tcm;
  * 触发下行通信，将 p_tpcm_tcm.data 发送给 TCM，并阻塞等待响应。
  * 返回值：成功返回接收到的响应数据的长度，失败返回 -1。
  */
+
+ 
+
 int dal_get_bmc_tpcm_tcm(void);
 
 #endif /* DAL_TCM_ADAPTER_H */

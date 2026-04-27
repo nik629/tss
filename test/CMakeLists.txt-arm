@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.10)
+# 明确声明这是一个 C 项目
+project(TCM_TSS_Test_ARM C)
+
+# 1. 接收外部传入的 TSS_ROOT 变量，如果没有传，则默认去上一级的 arm_out 找
+set(TSS_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/arm_out" CACHE PATH "Path to ARM compiled TSS libraries")
+
+# 2. 添加头文件搜索路径
+include_directories(${TSS_ROOT}/include)
+
+# 3. 添加华为要求的安全与优化编译选项 (严格对齐底层的 CFLAGS)
+add_compile_options(-fstack-protector-strong -D_FORTIFY_SOURCE=2 -O2)
+add_link_options(-Wl,-z,relro,-z,now)
+
+# 4. 查找我们在 arm_out 中交叉编译出的 TSS 动态库
+# 关键：NO_DEFAULT_PATH 强制 CMake 只能去 arm_out 找，绝对不能去宿主机的 /usr/lib 找！
+find_library(TSS2_ESYS_LIB NAMES tss2-esys PATHS ${TSS_ROOT}/lib NO_DEFAULT_PATH)
+find_library(TSS2_TCTILDR_LIB NAMES tss2-tctildr PATHS ${TSS_ROOT}/lib NO_DEFAULT_PATH)
+find_library(TSS2_RC_LIB NAMES tss2-rc PATHS ${TSS_ROOT}/lib NO_DEFAULT_PATH)
+
+if(NOT TSS2_ESYS_LIB OR NOT TSS2_TCTILDR_LIB)
+    message(FATAL_ERROR "未能在 ${TSS_ROOT}/lib 找到 ARM 架构的 TSS2 库！请确保底层的交叉编译已成功。")
+endif()
+
+# 5. 生成可执行程序 (假设你的源码文件叫 test_tss.c)
+add_executable(test_tss test_tss.c)
+
+# 6. 链接库
+target_link_libraries(test_tss ${TSS2_ESYS_LIB} ${TSS2_TCTILDR_LIB} ${TSS2_RC_LIB})
+
+# 注意：这里我们故意不设置 RPATH。
+# 因为你的 ARM 板子上的真实目录结构和你的编译机绝对不一样。
+# 放到板子上后，使用 export LD_LIBRARY_PATH 来指定库的路径是最灵活的。
